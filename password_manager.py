@@ -20,13 +20,10 @@ def load_storage():
                 return {}
             return json.loads(content)
     except (json.decoder.JSONDecodeError, FileNotFoundError):
-        print(f"Error: Invalid JSON data in {STORAGE_FILE}. Resetting storage.")
+        print("Error: Invalid JSON data in {}. Resetting storage.".format(STORAGE_FILE))
         with open(STORAGE_FILE, 'w') as reset_file:
             reset_file.write('{}')
         return {}
-
-
-
 
 def save_storage(storage):
     with open(STORAGE_FILE, 'w') as file:
@@ -38,34 +35,34 @@ def store_password(master_password, service, password):
     encrypted_password = encrypt(password, key)
     storage[service] = encrypted_password
     save_storage(storage)
-    print(f"Password for {service} stored successfully.")
+    print("Password for {} stored successfully.".format(service))
 
 def retrieve_password(master_password, service):
     storage = load_storage()
     if service not in storage:
-        print(f"No password found for {service}.")
+        print(f"No password found in {service}.")
         return
     key = generate_key(master_password)
     try:
         decrypted_password = decrypt(storage[service], key)
-        print(f"Password for {service}: {decrypted_password}")
+        print("Password for {} : {}".format(service, decrypted_password))
     except InvalidToken:
-        print("Invalid master password.")
+        print("Invalid Main password.")
 
 def generate_password(length, complexity):
     characters = string.ascii_letters + string.digits
     if complexity >= 2:
         characters += string.punctuation
     password = ''.join(secrets.choice(characters) for _ in range(length))
-    print(f"Generated password: {password}")
+    print("Generated password: {}".format(password))
     return password
 
 def main():
     parser = argparse.ArgumentParser(description='Command Line Password Manager')
-    parser.add_argument('--operation', required=True, choices=['store', 'retrieve', 'generate'], help='Operation to perform')
-    parser.add_argument('--master-password', help='Master password for encryption/decryption')
-    parser.add_argument('--service', help='Service name for the password')
-    parser.add_argument('--password', help='Password to store')
+    parser.add_argument('--operation', required=True, choices=['store', 'retrieve', 'generate'], help='There are three Operation to Perform (1. Store 2.Retrieve 3. Generate)')
+    parser.add_argument('--master-password', help='Master password for encryption/decryption of the main password')
+    parser.add_argument('--service', help='Service name for the password Ex.Gmail, Facebook')
+    parser.add_argument('--password', help='Original Password of the Service')
     parser.add_argument('--length', type=int, help='Length of the password to generate')
     parser.add_argument('--complexity', type=int, choices=[1, 2], default=1, help='Complexity of the password to generate (1: Alphanumeric, 2: Alphanumeric + Special Characters)')
 
