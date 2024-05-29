@@ -10,9 +10,23 @@ STORAGE_FILE = 'storage.json'
 
 def load_storage():
     if not os.path.exists(STORAGE_FILE):
+        with open(STORAGE_FILE, 'w') as file:
+            file.write('{}')
         return {}
-    with open(STORAGE_FILE, 'r') as file:
-        return json.load(file)
+    try:
+        with open(STORAGE_FILE, 'r') as file:
+            content = file.read()
+            if not content.strip():
+                return {}
+            return json.loads(content)
+    except (json.decoder.JSONDecodeError, FileNotFoundError):
+        print(f"Error: Invalid JSON data in {STORAGE_FILE}. Resetting storage.")
+        with open(STORAGE_FILE, 'w') as reset_file:
+            reset_file.write('{}')
+        return {}
+
+
+
 
 def save_storage(storage):
     with open(STORAGE_FILE, 'w') as file:
