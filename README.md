@@ -32,3 +32,14 @@ This command-line password manager application securely stores and manages user 
 
 ```sh
 python password_manager.py --operation store --master-password mysecretpassword --service gmail --password mygmailpassword
+```
+### To Retrive a Password
+
+```sh
+python password_manager.py --operation retrieve --master-password mysecretpassword --service gmail
+```
+### Generate a Strong Password
+
+```sh
+python password_manager.py --operation generate --length 12 --complexity 2
+
