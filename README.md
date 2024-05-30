@@ -10,7 +10,7 @@ This command-line password manager application securely stores and manages user 
 
 ## Requirements
 
-- Python 3.x
+- `Python 3.x` Newer 3.11
 - `cryptography` library
 
 ## Installation
@@ -19,6 +19,7 @@ This command-line password manager application securely stores and manages user 
     ```sh
     git clone https://github.com/yourusername/password_manager.git
     cd password_manager
+    python3 password_manager.py
     ```
 
 2. **Install dependencies**:
