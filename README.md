@@ -19,13 +19,16 @@ This command-line password manager application securely stores and manages user 
     ```sh
     git clone https://github.com/yourusername/password_manager.git
     cd password_manager
-    python3 password_manager.py
     ```
 
 2. **Install dependencies**:
     ```sh
     pip install -r requirements.txt
     ```
+3. **To Run the Program**:
+   ```sh
+   python3 password_manager.py
+   ```
 
 ## Usage
 
