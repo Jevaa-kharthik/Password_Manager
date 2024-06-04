@@ -7,6 +7,7 @@ This command-line password manager application securely stores and manages user 
 - Store new passwords securely by encrypting them using a master password provided by the user.
 - Retrieve passwords by decrypting them using the master password.
 - Generate strong random passwords based on user-specified length and complexity requirements.
+- This is used in every environment like Linux, MacOS and Windows
 
 ## Requirements
 
